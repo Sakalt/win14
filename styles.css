@@ -107,3 +107,13 @@ body {
     height: 100%;
     border: none;
 }
+.start-button {
+    background-image: url('path/to/start-button-icon.png');
+    background-size: cover;
+    background-position: center;
+    border: none;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    margin-left: auto;
+}
