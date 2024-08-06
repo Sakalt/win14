@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ヘルプ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: black;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .header button {
+            background-color: #0078d7;
+            border: none;
+            color: white;
+            padding: 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .header button:hover {
+            background-color: #005a9e;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .command-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .command-list li {
+            margin-bottom: 10px;
+        }
+
+        .command-list h2 {
+            margin-bottom: 10px;
+        }
+
+        .command-list p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ヘルプ</h1>
+        <button onclick="location.href='run.html'">コマンドプロンプト</button>
+    </div>
+    <div class="content">
+          <h3>version</h3>
+          <p>build4</p>
+    </div>
+</body>
+</html>
+
