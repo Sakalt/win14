@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設定</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: black;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .header button {
+            background-color: #0078d7;
+            border: none;
+            color: white;
+            padding: 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .header button:hover {
+            background-color: #005a9e;
+        }
+
+        .settings {
+            padding: 20px;
+        }
+
+        .setting-item {
+            margin-bottom: 20px;
+        }
+
+        .setting-item label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .setting-item input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .setting-item select, .setting-item input[type="text"] {
+            padding: 5px;
+            width: 200px;
+        }
+
+        .button-group {
+            margin-top: 20px;
+        }
+
+        .button-group button {
+            background-color: #0078d7;
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .button-group button:hover {
+            background-color: #005a9e;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>設定</h1>
+        <button id="save">保存</button>
+        <button id="reset">リセット</button>
+    </div>
+    <div class="settings">
+        <div class="setting-item">
+            <label for="theme">テーマ:</label>
+            <select id="theme">
+                <option value="light">ライト</option>
+                <option value="dark">ダーク</option>
+            </select>
+        </div>
+        <div class="setting-item">
+            <label for="notifications">通知:</label>
+            <input type="checkbox" id="notifications">
+            <label for="notifications">通知を有効にする</label>
+        </div>
+        <div class="setting-item">
+            <label for="homepage">ホームページURL:</label>
+            <input type="text" id="homepage">
+        </div>
+        <div class="button-group">
+            <button id="apply">適用</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ローカルストレージから設定を読み込む
+            const theme = localStorage.getItem('theme') || 'light';
+            const notifications = localStorage.getItem('notifications') === 'true';
+            const homepage = localStorage.getItem('homepage') || '';
+
+            document.getElementById('theme').value = theme;
+            document.getElementById('notifications').checked = notifications;
+            document.getElementById('homepage').value = homepage;
+        });
+
+        document.getElementById('save').addEventListener('click', () => {
+            // 設定をローカルストレージに保存する
+            const theme = document.getElementById('theme').value;
+            const notifications = document.getElementById('notifications').checked;
+            const homepage = document.getElementById('homepage').value;
+
+            localStorage.setItem('theme', theme);
+            localStorage.setItem('notifications', notifications);
+            localStorage.setItem('homepage', homepage);
+
+            alert('設定が保存されました');
+        });
+
+        document.getElementById('reset').addEventListener('click', () => {
+            // 設定をリセットする
+            localStorage.removeItem('theme');
+            localStorage.removeItem('notifications');
+            localStorage.removeItem('homepage');
+
+            // フォームを初期化する
+            document.getElementById('theme').value = 'light';
+            document.getElementById('notifications').checked = false;
+            document.getElementById('homepage').value = '';
+
+            alert('設定がリセットされました');
+        });
+
+        document.getElementById('apply').addEventListener('click', () => {
+            // 設定を適用する（ここでは実装なし）
+            alert('設定が適用されました');
+        });
+    </script>
+</body>
+</html>
