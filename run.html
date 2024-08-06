@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コマンドプロンプト</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #0f0;
+        }
+
+        .cmd-container {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: #000;
+            border: 1px solid #0f0;
+        }
+
+        .cmd-output {
+            white-space: pre-wrap;
+            margin: 10px 0;
+        }
+
+        .cmd-input {
+            width: 100%;
+            background-color: #000;
+            color: #0f0;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .cmd-input:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="cmd-container">
+        <div id="cmd-output" class="cmd-output">
+            C:\\> 
+        </div>
+        <input id="cmd-input" class="cmd-input" type="text" autofocus>
+    </div>
+    <script>
+        document.getElementById('cmd-input').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                executeCommand(this.value);
+                this.value = '';
+            }
+        });
+
+        function executeCommand(command) {
+            const output = document.getElementById('cmd-output');
+            const currentOutput = output.innerHTML;
+
+            let response;
+
+            switch (command.toLowerCase()) {
+                case 'help':
+                    response = 'コマンド一覧:\nhelp - ヘルプを表示\ncls - 画面をクリア\nabout - このシステムについて';
+                    break;
+                case 'cls':
+                    response = '';
+                    break;
+                case 'about':
+                    response = 'Windows 14 コマンドプロンプトシミュレーター';
+                    break;
+                default:
+                    response = `'${command}' は内部コマンドまたは外部コマンドとして認識されていません。`;
+                    break;
+            }
+
+            output.innerHTML = currentOutput + '\n' + 'C:\\> ' + command + '\n' + response;
+            output.scrollTop = output.scrollHeight;
+        }
+    </script>
+</body>
+</html>
