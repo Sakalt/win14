@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ドキュメント</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: black;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .header button {
+            background-color: #0078d7;
+            border: none;
+            color: white;
+            padding: 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .header button:hover {
+            background-color: #005a9e;
+        }
+
+        .file-explorer {
+            padding: 20px;
+        }
+
+        .file, .folder {
+            padding: 10px;
+            margin: 5px;
+            background-color: white;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .file:hover, .folder:hover {
+            background-color: #e0e0e0;
+        }
+
+        .file-explorer .files, .file-explorer .folders {
+            list-style: none;
+            padding: 0;
+        }
+
+        .file-explorer .files li, .file-explorer .folders li {
+            margin-bottom: 10px;
+        }
+
+        #upload-form {
+            margin-bottom: 20px;
+        }
+
+        #upload-form input[type="file"] {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ドキュメント</h1>
+        <button id="refresh">更新</button>
+    </div>
+    <div class="file-explorer">
+        <div id="upload-form">
+            <input type="file" id="file-input">
+            <button id="upload">アップロード</button>
+        </div>
+        <h2>ドキュメントフォルダ</h2>
+        <ul id="file-list" class="files">
+            <!-- ファイルリストがここに表示される -->
+        </ul>
+    </div>
+    <script>
+        const directoryPath = 'Documents\\'; // ドキュメントフォルダのパス
+
+        function updateFileList() {
+            const fileList = document.getElementById('file-list');
+            fileList.innerHTML = '';
+
+            // ローカルストレージからファイルリストを取得
+            const files = JSON.parse(localStorage.getItem(directoryPath)) || [];
+
+            files.forEach(file => {
+                const li = document.createElement('li');
+                li.className = 'file';
+                li.textContent = file;
+                fileList.appendChild(li);
+            });
+        }
+
+        document.getElementById('upload').addEventListener('click', () => {
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+
+            if (file) {
+                const fileName = file.name;
+                const files = JSON.parse(localStorage.getItem(directoryPath)) || [];
+                files.push(fileName);
+                localStorage.setItem(directoryPath, JSON.stringify(files));
+                updateFileList();
+                fileInput.value = ''; // ファイル選択をリセット
+            } else {
+                alert('ファイルを選択してください。');
+            }
+        });
+
+        document.getElementById('refresh').addEventListener('click', () => {
+            updateFileList();
+        });
+
+        // 初期表示
+        updateFileList();
+    </script>
+</body>
+</html>
