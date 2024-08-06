@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edgeブラウザ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: black;
+        }
+
+        .browser-header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tabs {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .tab {
+            background-color: #555;
+            border: none;
+            color: white;
+            padding: 10px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            background-color: #0078d7;
+        }
+
+        .address-bar {
+            flex-grow: 2;
+            padding: 5px;
+            margin: 0 10px;
+        }
+
+        .browser-body {
+            padding: 20px;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 10px;
+            background-color: white;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+        }
+
+        .features-list li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .feature-content {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+        }
+
+        .feature-content.active {
+            display: block;
+        }
+
+        .feature-content .feature-header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bookmarks-list, .history-list, .downloads-list, .extensions-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .bookmarks-list li, .history-list li, .downloads-list li, .extensions-list li {
+            padding: 5px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .bookmarks-list li:hover, .history-list li:hover, .downloads-list li:hover, .extensions-list li:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="browser-header">
+        <div class="tabs">
+            <button class="tab active">タブ1</button>
+            <button class="tab">タブ2</button>
+            <button class="tab">タブ3</button>
+            <button class="tab">＋</button>
+        </div>
+        <input type="text" class="address-bar" placeholder="検索またはURLを入力">
+    </div>
+    <div class="browser-body">
+        <ul class="features-list">
+            <li data-feature="tab-management">タブ管理</li>
+            <li data-feature="private-browsing">プライベートブラウジング</li>
+            <li data-feature="bookmarks">ブックマーク</li>
+            <li data-feature="history">履歴</li>
+            <li data-feature="downloads">ダウンロード管理</li>
+            <li data-feature="extensions">拡張機能</li>
+            <li data-feature="search-engine">検索エンジンの変更</li>
+            <li data-feature="shortcuts">ショートカットキー</li>
+            <li data-feature="page-translation">ページ翻訳</li>
+            <li data-feature="page-capture">ページキャプチャ</li>
+            <li data-feature="reading-mode">読み取りモード</li>
+            <li data-feature="parental-control">ペアレンタルコントロール</li>
+        </ul>
+        <div id="tab-management" class="feature-content">
+            <h2>タブ管理</h2>
+            <p>タブを開いたり閉じたりする機能。</p>
+            <div class="tabs">
+                <button class="tab active">タブ1</button>
+                <button class="tab">タブ2</button>
+                <button class="tab">タブ3</button>
+                <button class="tab">＋</button>
+            </div>
+        </div>
+        <div id="private-browsing" class="feature-content">
+            <h2>プライベートブラウジング</h2>
+            <p>プライベートブラウジングモード。</p>
+        </div>
+        <div id="bookmarks" class="feature-content">
+            <div class="feature-header">
+                <h2>ブックマーク</h2>
+                <button id="add-bookmark">ブックマークを追加</button>
+            </div>
+            <ul class="bookmarks-list" id="bookmarks-list">
+                <!-- ブックマークアイテムがここに追加される -->
+            </ul>
+        </div>
+        <div id="history" class="feature-content">
+            <h2>履歴</h2>
+            <ul class="history-list" id="history-list">
+                <!-- 履歴アイテムがここに追加される -->
+            </ul>
+        </div>
+        <div id="downloads" class="feature-content">
+            <h2>ダウンロード管理</h2>
+            <ul class="downloads-list" id="downloads-list">
+                <!-- ダウンロードアイテムがここに追加される -->
+            </ul>
+        </div>
+        <div id="extensions" class="feature-content">
+            <h2>拡張機能</h2>
+            <ul class="extensions-list" id="extensions-list">
+                <!-- 拡張機能アイテムがここに追加される -->
+            </ul>
+        </div>
+        <div id="search-engine" class="feature-content">
+            <h2>検索エンジンの変更</h2>
+            <p>検索エンジンを変更する機能。</p>
+        </div>
+        <div id="shortcuts" class="feature-content">
+            <h2>ショートカットキー</h2>
+            <p>ショートカットキーの説明。</p>
+        </div>
+        <div id="page-translation" class="feature-content">
+            <h2>ページ翻訳</h2>
+            <p>ページを翻訳する機能。</p>
+        </div>
+        <div id="page-capture" class="feature-content">
+            <h2>ページキャプチャ</h2>
+            <p>ページのスクリーンショットを撮る機能。</p>
+        </div>
+        <div id="reading-mode" class="feature-content">
+            <h2>読み取りモード</h2>
+            <p>読み取りモード機能。</p>
+        </div>
+        <div id="parental-control" class="feature-content">
+            <h2>ペアレンタルコントロール</h2>
+            <p>ペアレンタルコントロール機能。</p>
+        </div>
+    </div>
+    <script>
+        // タブ管理機能
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // 機能コンテンツの表示
+        document.querySelectorAll('.features-list li').forEach(item => {
+            item.addEventListener('click', () => {
+                document.querySelectorAll('.feature-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                document.getElementById(item.getAttribute('data-feature')).classList.add('active');
+            });
+        });
+
+        // ブックマーク機能
+        const bookmarksList = document.getElementById('bookmarks-list');
+        document.getElementById('add-bookmark').addEventListener('click', () => {
+            const bookmarkName = prompt('ブックマーク名を入力してください:');
+            if (bookmarkName) {
+                const li = document.createElement('li');
+                li.textContent = bookmarkName;
+                bookmarksList.appendChild(li);
+            }
+        });
+
+        // 履歴機能（ダミーデータ）
+        const historyList = document.getElementById('history-list');
+        const historyItems = ['example.com', 'example.org', 'example.net'];
+        historyItems.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            historyList.appendChild(li);
+        });
+
+        // ダウンロード管理機能（ダミーデータ）
+        const downloadsList = document.getElementById('downloads-list');
+        const downloadsItems = ['file1.zip', 'file2.pdf', 'file3.jpg'];
+        downloadsItems.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            downloadsList.appendChild(li);
+        });
+
+        // 拡張機能管理機能（ダミーデータ）
+        const extensionsList = document.getElementById('extensions-list');
+        const extensionsItems = ['AdBlock', 'Grammarly', 'LastPass'];
+        extensionsItems.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item;
+            extensionsList.appendChild(li);
+        });
+
+        // 検索エンジン変更機能
+        document.getElementById('search-engine').addEventListener('click', () => {
+            const newSearchEngine = prompt('https://www.bing.com');
+            if (newSearchEngine) {
+                alert(`検索エンジンが ${newSearchEngine} に変更されました`);
+            }
+        });
+    </script>
+</body>
+</html>
