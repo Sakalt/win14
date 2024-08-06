@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイコンピュータ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: black;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        .header button {
+            background-color: #0078d7;
+            border: none;
+            color: white;
+            padding: 10px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .header button:hover {
+            background-color: #005a9e;
+        }
+
+        .file-explorer {
+            padding: 20px;
+        }
+
+        .directory, .file {
+            padding: 10px;
+            margin: 5px;
+            background-color: white;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .directory:hover, .file:hover {
+            background-color: #e0e0e0;
+        }
+
+        .file-explorer .files, .file-explorer .directories {
+            list-style: none;
+            padding: 0;
+        }
+
+        .file-explorer .files li, .file-explorer .directories li {
+            margin-bottom: 10px;
+        }
+
+        .file-explorer .directories {
+            margin-bottom: 20px;
+        }
+
+        #upload-form {
+            margin-bottom: 20px;
+        }
+
+        #upload-form input[type="file"] {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>マイコンピュータ</h1>
+        <button id="refresh">更新</button>
+    </div>
+    <div class="file-explorer">
+        <div id="upload-form">
+            <input type="file" id="file-input">
+            <button id="upload">アップロード</button>
+        </div>
+        <h2>ドライブ</h2>
+        <ul class="directories">
+            <li class="directory" onclick="openDirectory('C:\\')">Cドライブ</li>
+            <li class="directory" onclick="openDirectory('D:\\')">Dドライブ</li>
+        </ul>
+        <div id="directory-content">
+            <!-- ディレクトリの内容がここに表示される -->
+        </div>
+    </div>
+    <script>
+        function openDirectory(path) {
+            const directoryContent = document.getElementById('directory-content');
+            let contentHtml = `<h2>${path}</h2><ul class="files">`;
+
+            // ローカルストレージからディレクトリのファイルを取得
+            const files = JSON.parse(localStorage.getItem(path)) || [];
+
+            files.forEach(file => {
+                contentHtml += `<li class="file">${file}</li>`;
+            });
+
+            contentHtml += `</ul>`;
+            directoryContent.innerHTML = contentHtml;
+        }
+
+        function updateLocalStorage(path, files) {
+            localStorage.setItem(path, JSON.stringify(files));
+        }
+
+        document.getElementById('refresh').addEventListener('click', () => {
+            const currentPath = document.querySelector('#directory-content h2');
+            if (currentPath) {
+                openDirectory(currentPath.textContent);
+            }
+        });
+
+        document.getElementById('upload').addEventListener('click', () => {
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+            const currentPath = document.querySelector('#directory-content h2').textContent;
+
+            if (file && currentPath) {
+                const fileName = file.name;
+                const files = JSON.parse(localStorage.getItem(currentPath)) || [];
+                files.push(fileName);
+                updateLocalStorage(currentPath, files);
+                openDirectory(currentPath);
+                fileInput.value = ''; // ファイル選択をリセット
+            } else {
+                alert('ファイルを選択してください。');
+            }
+        });
+
+        // 初期表示
+        openDirectory('C:\\');
+    </script>
+</body>
+</html>
