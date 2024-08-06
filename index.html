@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 14</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="taskbar">
+        <div class="start-menu">
+            <button class="start-button">スタート</button>
+            <div class="menu-content" id="startMenu">
+                <ul>
+                    <li data-app="myComputer">マイコンピュータ</li>
+                    <li data-app="documents">ドキュメント</li>
+                    <li data-app="settings">設定</li>
+                    <li data-app="find">検索</li>
+                    <li data-app="help">ヘルプ</li>
+                    <li data-app="run">実行</li>
+                    <li data-app="shutdown">シャットダウン</li>
+                </ul>
+            </div>
+        </div>
+        <div class="taskbar-icons">
+            <img src="assets/icon1.png" alt="アイコン1">
+            <img src="assets/icon2.png" alt="アイコン2">
+            <img src="assets/icon3.png" alt="アイコン3">
+        </div>
+    </div>
+
+    <div class="desktop">
+        <div class="window" id="myComputer" data-url="https://sakalt.github.io/win14/myComputer.html">
+            <div class="title-bar">
+                <div class="title-bar-text">マイコンピュータ</div>
+                <div class="title-bar-controls">
+                    <button aria-label="最小化"></button>
+                    <button aria-label="最大化"></button>
+                    <button aria-label="閉じる"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <iframe src="https://sakalt.github.io/win14/myComputer.html" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="window" id="documents" data-url="https://sakalt.github.io/win14/documents.html">
+            <div class="title-bar">
+                <div class="title-bar-text">ドキュメント</div>
+                <div class="title-bar-controls">
+                    <button aria-label="最小化"></button>
+                    <button aria-label="最大化"></button>
+                    <button aria-label="閉じる"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <iframe src="https://sakalt.github.io/win14/documents.html" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="window" id="settings" data-url="https://sakalt.github.io/win14/settings.html">
+            <div class="title-bar">
+                <div class="title-bar-text">設定</div>
+                <div class="title-bar-controls">
+                    <button aria-label="最小化"></button>
+                    <button aria-label="最大化"></button>
+                    <button aria-label="閉じる"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <iframe src="https://sakalt.github.io/win14/settings.html" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="window" id="find" data-url="https://sakalt.github.io/win14/find.html">
+            <div class="title-bar">
+                <div class="title-bar-text">検索</div>
+                <div class="title-bar-controls">
+                    <button aria-label="最小化"></button>
+                    <button aria-label="最大化"></button>
+                    <button aria-label="閉じる"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <iframe src="https://sakalt.github.io/win14/find.html" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="window" id="help" data-url="https://sakalt.github.io/win14/help.html">
+            <div class="title-bar">
+                <div class="title-bar-text">ヘルプ</div>
+                <div class="title-bar-controls">
+                    <button aria-label="最小化"></button>
+                    <button aria-label="最大化"></button>
+                    <button aria-label="閉じる"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <iframe src="https://sakalt.github.io/win14/help.html" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="window" id="run" data-url="https://sakalt.github.io/win14/run.html">
+            <div class="title-bar">
+                <div class="title-bar-text">実行</div>
+                <div class="title-bar-controls">
+                    <button aria-label="最小化"></button>
+                    <button aria-label="最大化"></button>
+                    <button aria-label="閉じる"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <iframe src="https://sakalt.github.io/win14/run.html" frameborder="0"></iframe>
+            </div>
+        </div>
+        <div class="window" id="shutdown" data-url="https://sakalt.github.io/win14/shutdown.html">
+            <div class="title-bar">
+                <div class="title-bar-text">シャットダウン</div>
+                <div class="title-bar-controls">
+                    <button aria-label="最小化"></button>
+                    <button aria-label="最大化"></button>
+                    <button aria-label="閉じる"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <iframe src="https://sakalt.github.io/win14/shutdown.html" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
